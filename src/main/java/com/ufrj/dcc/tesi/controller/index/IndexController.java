@@ -1,11 +1,15 @@
 package com.ufrj.dcc.tesi.controller.index;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ufrj.dcc.tesi.controller.index.form.IndexForm;
+import com.ufrj.dcc.tesi.service.UsuarioService;
 
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
@@ -16,6 +20,9 @@ import facebook4j.auth.AccessToken;
 @Controller
 @RequestMapping( "/index" )
 public class IndexController {
+
+	@Autowired
+	private UsuarioService usuarioService;
 
 	final static String appId = "252774131593896";
 	final static String appSecret = "1777932d489db9415b00e59fd7904aeb";
@@ -29,7 +36,8 @@ public class IndexController {
 	}
 
 	@RequestMapping( method = RequestMethod.POST )
-	public String submit( final IndexForm indexForm, final Model model ) {
+	public String submit( final IndexForm indexForm, final Model model,
+			final HttpServletRequest request ) {
 
 		Facebook facebook = new FacebookFactory().getInstance();
 
@@ -38,14 +46,16 @@ public class IndexController {
 				.getAccessToken() ) );
 
 		try {
+
 			User user = facebook.getMe();
 
-			System.out.println( user );
+			return usuarioService.loginUser( user, request );
+
 		} catch ( FacebookException e ) {
 
 			e.printStackTrace();
 		}
 
-		return "/home";
+		return "/index";
 	}
 }
