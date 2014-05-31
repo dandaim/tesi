@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.ufrj.dcc.tesi.domain.Disciplina;
 import com.ufrj.dcc.tesi.domain.Professor;
 import com.ufrj.dcc.tesi.domain.Usuario;
-import com.ufrj.dcc.tesi.repository.DisciplinaRepository;
 import com.ufrj.dcc.tesi.repository.UsuarioRepository;
 
 import facebook4j.User;
@@ -23,7 +22,7 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
 	@Autowired
-	private DisciplinaRepository disciplinaRepository;
+	private DisciplinaService disciplinaService;
 
 	public Usuario findUsuarioByFacebookId( String facebookId ) {
 
@@ -55,7 +54,7 @@ public class UsuarioService {
 
 		for ( Usuario usuario : professores ) {
 
-			List<Disciplina> disciplinas = disciplinaRepository
+			List<Disciplina> disciplinas = disciplinaService
 					.getDisciplinasByProfessor( usuario.getId() );
 
 			Professor professor = new Professor( usuario, disciplinas );
@@ -64,5 +63,17 @@ public class UsuarioService {
 		}
 
 		return result;
+	}
+
+	public Professor getProfessorById( Integer professorId ) {
+
+		Usuario usuario = usuarioRepository.findUsuarioById( professorId );
+
+		List<Disciplina> disciplinas = disciplinaService
+				.getDisciplinasByProfessor( professorId );
+
+		Professor professor = new Professor( usuario, disciplinas );
+
+		return professor;
 	}
 }

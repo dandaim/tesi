@@ -38,7 +38,16 @@ public class UsuarioRepository {
 		List<Usuario> usuarioList = jdbcTemplate.query( query,
 				new Object[] { facebookId }, new UsuarioRowMapper() );
 
-		System.out.println( usuarioList );
+		return usuarioList.iterator().hasNext() ? usuarioList.iterator().next()
+				: null;
+	}
+
+	public Usuario findUsuarioById( Integer id ) {
+
+		String query = "SELECT * FROM usuario u INNER JOIN usuarioFacebook uf ON u.id = uf.usuario_id WHERE u.id = ?";
+
+		List<Usuario> usuarioList = jdbcTemplate.query( query,
+				new Object[] { id }, new UsuarioRowMapper() );
 
 		return usuarioList.iterator().hasNext() ? usuarioList.iterator().next()
 				: null;

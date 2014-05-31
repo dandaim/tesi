@@ -23,22 +23,25 @@
 					<div class="row">
 						<div class="panel panel-default">
 						  <div class="panel-body">
-						    <h3>Professores</h3>
+						    <h3>Professor - ${professor.nomeFace}</h3>
 						  </div>
 						</div>
 						
+						<h5>Disciplinas ministradas</h5>
 						<table class="table table-striped">
-							<c:forEach var="professor" items="${professores}">
-								<tr>								
-									<td><a href="${context}/professores/professor?professorId=${professor.id}">${professor.nomeFace}</a></td>
+							<tr>
+								<th>Nome</th>
+								<th></th>
+							</tr>
+							<c:forEach var="disciplina" items="${professor.disciplinas}">
+								<tr>
+									<td>${disciplina.nome}</td>
+									<td><a href="${context}/disciplinas/temas?disciplinaId=${disciplina.disciplinaId}">Temas</a></td>
 								</tr>
 							</c:forEach>
 						</table>						
 					</div>
 			</div>
-		</div>
-	  
-		
-		
+		</div>		
 	</body>
 </html>

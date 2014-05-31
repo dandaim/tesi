@@ -19,7 +19,12 @@
 		<div class="content">
 			<div id='fb-root'></div>
 			<div class="container">
-					<%@include file="./includes/header.jsp" %>
+				<%@include file="./includes/header.jsp" %>
+				<div class="panel panel-default">
+				  <div class="panel-body">
+				    <h3>Seja bem-vindo(a) ao DCC Colaborativo</h3>
+				  </div>
+				</div>
 			</div>
 		</div>
 	</body>

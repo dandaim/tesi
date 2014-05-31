@@ -23,22 +23,18 @@
 					<div class="row">
 						<div class="panel panel-default">
 						  <div class="panel-body">
-						    <h3>Professores</h3>
+						    <h3>Disciplina - ${disciplinaWrapper.disciplina.nome}</h3>
 						  </div>
 						</div>
 						
-						<table class="table table-striped">
-							<c:forEach var="professor" items="${professores}">
-								<tr>								
-									<td><a href="${context}/professores/professor?professorId=${professor.id}">${professor.nomeFace}</a></td>
-								</tr>
-							</c:forEach>
-						</table>						
+						<h5>Temas</h5>
+						<c:forEach var="tema" items="${disciplinaWrapper.temas }">
+							<div class="row span8">
+								<span>${tema.nome }</span>
+							</div>
+						</c:forEach>									
 					</div>
 			</div>
-		</div>
-	  
-		
-		
+		</div>		
 	</body>
 </html>

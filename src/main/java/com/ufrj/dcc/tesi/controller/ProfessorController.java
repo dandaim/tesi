@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ufrj.dcc.tesi.domain.Professor;
 import com.ufrj.dcc.tesi.service.UsuarioService;
@@ -26,5 +27,16 @@ public class ProfessorController {
 		model.addAttribute( "professores", professores );
 
 		return "/professores/index";
+	}
+
+	@RequestMapping( value = "/professor", method = RequestMethod.GET )
+	public String getProfessorView(
+			@RequestParam( "professorId" ) Integer professorId, Model model ) {
+
+		Professor professor = usuarioService.getProfessorById( professorId );
+
+		model.addAttribute( "professor", professor );
+
+		return "/professores/professor";
 	}
 }

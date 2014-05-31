@@ -34,4 +34,15 @@ public class DisciplinaRepository {
 		return disciplinaList;
 	}
 
+	public Disciplina getDisciplinaById( Integer disciplinaId ) {
+
+		String query = "SELECT * FROM disciplina WHERE id = ?";
+
+		List<Disciplina> disciplinaList = jdbcTemplate.query( query,
+				new Object[] { disciplinaId }, new DisciplinaRowMapper() );
+
+		return disciplinaList.iterator().hasNext() ? disciplinaList.iterator()
+				.next() : null;
+	}
+
 }
