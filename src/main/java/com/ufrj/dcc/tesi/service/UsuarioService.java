@@ -1,11 +1,17 @@
 package com.ufrj.dcc.tesi.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ufrj.dcc.tesi.domain.Disciplina;
+import com.ufrj.dcc.tesi.domain.Professor;
 import com.ufrj.dcc.tesi.domain.Usuario;
+import com.ufrj.dcc.tesi.repository.DisciplinaRepository;
 import com.ufrj.dcc.tesi.repository.UsuarioRepository;
 
 import facebook4j.User;
@@ -15,6 +21,9 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+
+	@Autowired
+	private DisciplinaRepository disciplinaRepository;
 
 	public Usuario findUsuarioByFacebookId( String facebookId ) {
 
@@ -38,4 +47,22 @@ public class UsuarioService {
 		return "/home";
 	}
 
+	public List<Professor> getProfessores() {
+
+		List<Usuario> professores = usuarioRepository.getProfessores();
+
+		List<Professor> result = new ArrayList<Professor>();
+
+		for ( Usuario usuario : professores ) {
+
+			List<Disciplina> disciplinas = disciplinaRepository
+					.getDisciplinasByProfessor( usuario.getId() );
+
+			Professor professor = new Professor( usuario, disciplinas );
+
+			result.add( professor );
+		}
+
+		return result;
+	}
 }

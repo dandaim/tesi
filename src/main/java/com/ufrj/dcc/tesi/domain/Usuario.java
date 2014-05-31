@@ -13,6 +13,15 @@ public class Usuario {
 		super();
 	}
 
+	public Usuario( Integer id, String idFacebook, TipoUsuarioEnum tipoUsuario,
+			String nomeFace ) {
+		super();
+		this.id = id;
+		this.idFacebook = idFacebook;
+		this.tipoUsuario = tipoUsuario;
+		this.nomeFace = nomeFace;
+	}
+
 	public Usuario( User user, Integer id ) {
 
 		this.id = id;

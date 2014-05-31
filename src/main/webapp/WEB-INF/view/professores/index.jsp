@@ -13,14 +13,23 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
 		<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" media="screen">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script src="http://connect.facebook.net/en_US/all.js"></script>
+	 	<script src="http://connect.facebook.net/en_US/all.js"></script>  
 	</head> 
 	<body>
 		<div class="content">
-			<div id='fb-root'></div>
+			<div id="fb-root"></div>	
 			<div class="container">
-					<%@include file="./includes/header.jsp" %>
+					<%@include file="../includes/header.jsp" %>
+					<div class="row">
+						<h3>Professores</h3>
+						<c:forEach var="professor" items="${professores}">
+							<a href="${context}/professores/professor?professorId=${professor.id}">${professor.nomeFace}</a>
+						</c:forEach>
+					</div>
 			</div>
 		</div>
+	  
+		
+		
 	</body>
 </html>

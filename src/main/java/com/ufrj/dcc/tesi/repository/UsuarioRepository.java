@@ -71,4 +71,17 @@ public class UsuarioRepository {
 
 		return id;
 	}
+
+	public List<Usuario> getProfessores() {
+
+		String query = "SELECT * FROM usuario u INNER JOIN usuarioFacebook uf ON u.id = "
+				+ " uf.usuario_id WHERE u.tipo = ?";
+
+		List<Usuario> usuarioList = jdbcTemplate.query( query,
+				new Object[] { TipoUsuarioEnum.PROFESSOR.toString() },
+				new UsuarioRowMapper() );
+
+		return usuarioList;
+
+	}
 }

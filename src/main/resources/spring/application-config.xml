@@ -7,7 +7,7 @@
     
     <!-- Uncomment and add your base-package here: -->
          <context:component-scan
-            base-package="com.ufrj.dcc.tesi"/> 
+            base-package="com.ufrj.dcc.tesi" /> 
             
     <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

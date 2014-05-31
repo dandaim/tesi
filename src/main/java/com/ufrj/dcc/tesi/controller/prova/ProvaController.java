@@ -16,7 +16,7 @@ public class ProvaController {
 
 		model.addAttribute( "provaForm", new ProvaForm() );
 
-		return "/index";
+		return "/prova/index";
 	}
 
 	@RequestMapping( value = "/request", method = RequestMethod.POST )
