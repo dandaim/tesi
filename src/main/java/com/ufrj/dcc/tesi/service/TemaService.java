@@ -20,4 +20,10 @@ public class TemaService {
 
 	}
 
+	public List<Tema> getTemasByProvaId( Integer provaId ) {
+
+		return temaRepository.getTemasByProvaId( provaId );
+
+	}
+
 }

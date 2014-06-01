@@ -32,4 +32,14 @@ public class TemaRepository {
 		return temaList;
 	}
 
+	public List<Tema> getTemasByProvaId( Integer provaId ) {
+
+		String query = "SELECT * FROM tema t INNER JOIN provaTema pt ON t.id = pt.tema_id WHERE pt.prova_id = ?";
+
+		List<Tema> temaList = jdbcTemplate.query( query,
+				new Object[] { provaId }, new TemaRowMapper() );
+
+		return temaList;
+	}
+
 }

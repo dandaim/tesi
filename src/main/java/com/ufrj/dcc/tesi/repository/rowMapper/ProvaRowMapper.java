@@ -14,13 +14,14 @@ public class ProvaRowMapper implements RowMapper<Prova> {
 
 		Prova prova = new Prova();
 
-		prova.setAno( rs.getString( "ano" ) );
+		prova.setAno( rs.getString( "ano" ).split( "-" )[0] );
 		prova.setId( rs.getInt( "id" ) );
 		prova.setIdDisciplina( rs.getInt( "disciplina_id" ) );
 		prova.setIdProfessor( rs.getInt( "professor_id" ) );
 		prova.setIdUsuario( rs.getInt( "usuario_id" ) );
 		prova.setPeriodo( rs.getString( "periodo" ) );
 		prova.setSrc( rs.getString( "src" ) );
+		prova.setNomeProfessor( rs.getString( "nomeFace" ) );
 
 		return prova;
 	}

@@ -1,28 +1,31 @@
 package com.ufrj.dcc.tesi.controller.prova;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ufrj.dcc.tesi.controller.prova.form.ProvaForm;
+import com.ufrj.dcc.tesi.domain.ProvaWrapper;
+import com.ufrj.dcc.tesi.service.ProvaService;
 
 @Controller
-@RequestMapping( "/prova" )
+@RequestMapping( "/provas" )
 public class ProvaController {
 
-	@RequestMapping( value = "/view", method = RequestMethod.GET )
-	public String getView( final Model model ) {
+	@Autowired
+	private ProvaService provaService;
 
-		model.addAttribute( "provaForm", new ProvaForm() );
+	@RequestMapping( value = "/prova", method = RequestMethod.GET )
+	public String getView( @RequestParam( "provaId" ) final Integer provaId,
+			final Model model ) {
 
-		return "/prova/index";
-	}
+		ProvaWrapper provaWrapper = provaService.getProvaInfo( provaId );
 
-	@RequestMapping( value = "/request", method = RequestMethod.POST )
-	public String submitForm( final ProvaForm provaForm, final Model model ) {
+		model.addAttribute( "provaWrapper", provaWrapper );
 
-		return "";
+		return "/provas/prova";
 	}
 
 }

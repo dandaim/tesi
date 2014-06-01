@@ -28,6 +28,11 @@ public class DisciplinaService {
 		return disciplinaRepository.getDisciplinasByProfessor( usuarioId );
 	}
 
+	public Disciplina getDisciplinaById( Integer disciplinaId ) {
+
+		return disciplinaRepository.getDisciplinaById( disciplinaId );
+	}
+
 	public DisciplinaWrapper getDisciplinaInfo( Integer disciplinaId ) {
 
 		DisciplinaWrapper disciplinaWrapper = new DisciplinaWrapper();

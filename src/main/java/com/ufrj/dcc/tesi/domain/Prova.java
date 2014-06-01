@@ -9,6 +9,7 @@ public class Prova {
 	private Integer idUsuario;
 	private Integer idDisciplina;
 	private Integer idProfessor;
+	private String nomeProfessor;
 
 	public Integer getId() {
 		return id;
@@ -64,5 +65,13 @@ public class Prova {
 
 	public void setIdProfessor( Integer idProfessor ) {
 		this.idProfessor = idProfessor;
+	}
+
+	public String getNomeProfessor() {
+		return nomeProfessor;
+	}
+
+	public void setNomeProfessor( String nomeProfessor ) {
+		this.nomeProfessor = nomeProfessor;
 	}
 }

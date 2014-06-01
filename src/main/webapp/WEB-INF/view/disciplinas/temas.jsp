@@ -10,9 +10,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Welcome</title>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
 		<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" media="screen">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 	 	<script src="http://connect.facebook.net/en_US/all.js"></script>  
 	</head> 
 	<body>
@@ -28,11 +28,29 @@
 						</div>
 						
 						<h5>Temas</h5>
-						<c:forEach var="tema" items="${disciplinaWrapper.temas }">
-							<div class="row span8">
-								<span>${tema.nome }</span>
-							</div>
-						</c:forEach>									
+						<table class="table table-striped">
+							<c:forEach var="tema" items="${disciplinaWrapper.temas }">							
+								<div class="row span8">
+									<tr>
+										<td>
+											<span>${tema.nome}</span>
+										</td>
+										<td>
+											<div class="btn-group">
+											  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											    Links <span class="caret"></span>
+											  </button>
+											  <ul class="dropdown-menu" role="menu">
+											  	<c:forEach var="prova" items="${tema.provas}">
+											    	<li><a href="${context}/provas/prova?provaId=${prova.id}">Prova ${prova.ano}/${prova.periodo} (${prova.nomeProfessor})</a></li>
+											    </c:forEach>								    
+											  </ul>
+											</div>
+										</td>										
+									</tr>
+								</div>
+							</c:forEach>	
+						</table>														
 					</div>
 			</div>
 		</div>		
