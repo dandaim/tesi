@@ -46,4 +46,12 @@ public class ProvaService {
 
 		return provaWrapper;
 	}
+
+	public List<Prova> getProvasByProfessorId( Integer professorId ) {
+
+		List<Prova> provas = provaRepository
+				.getProvasByProfessorId( professorId );
+
+		return provas;
+	}
 }

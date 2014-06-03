@@ -12,7 +12,7 @@
 				
 				<ul class="nav navbar-nav">					
 					<li>
-						<a href="${context}/prova/view">Provas</a>
+						<a href="${context}/disciplinas/view">Disciplinas</a>
 					</li>
 					<li>
 						<a href="${context}/professores/view">Professores</a>

@@ -22,6 +22,16 @@ public class DisciplinaRepository {
 		this.jdbcTemplate = new JdbcTemplate( dataSource );
 	}
 
+	public List<Disciplina> getDisciplinas() {
+
+		String query = "SELECT * FROM disciplina";
+
+		List<Disciplina> disciplinas = jdbcTemplate.query( query,
+				new DisciplinaRowMapper() );
+
+		return disciplinas;
+	}
+
 	public List<Disciplina> getDisciplinasByProfessor( Integer professorId ) {
 
 		String query = "SELECT d.* FROM disciplina d "

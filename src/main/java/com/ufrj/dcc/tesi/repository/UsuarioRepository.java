@@ -93,4 +93,15 @@ public class UsuarioRepository {
 		return usuarioList;
 
 	}
+
+	public List<Usuario> getProfessoresByDisciplinaId( Integer disciplinaId ) {
+
+		String query = "SELECT p.*, uf.* FROM usuario p INNER JOIN usuarioFacebook uf ON p.id = uf.usuario_id INNER JOIN disciplinaProfessor dp ON "
+				+ " p.id = dp.usuario_id WHERE dp.disciplina_id = ?";
+
+		List<Usuario> professores = jdbcTemplate.query( query,
+				new Object[] { disciplinaId }, new UsuarioRowMapper() );
+
+		return professores;
+	}
 }

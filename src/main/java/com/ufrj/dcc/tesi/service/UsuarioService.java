@@ -76,4 +76,12 @@ public class UsuarioService {
 
 		return professor;
 	}
+
+	public List<Usuario> getProfessoresByDisciplinaId( Integer disciplinaId ) {
+
+		List<Usuario> professores = usuarioRepository
+				.getProfessoresByDisciplinaId( disciplinaId );
+
+		return professores;
+	}
 }

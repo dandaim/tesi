@@ -46,8 +46,16 @@ public class ProvaRepository {
 		return provas.iterator().hasNext() ? provas.iterator().next() : null;
 	}
 
-	public void getAllProvas() {
+	public List<Prova> getProvasByProfessorId( Integer professorId ) {
 
+		String query = "SELECT p.*, uf.nomeFace FROM prova p "
+				+ " INNER JOIN usuario pr ON p.professor_id = pr.id INNER JOIN usuarioFacebook uf ON uf.usuario_id = pr.id"
+				+ " WHERE p.professor_id = ?";
+
+		List<Prova> provas = jdbcTemplate.query( query,
+				new Object[] { professorId }, new ProvaRowMapper() );
+
+		return provas;
 	}
 
 }

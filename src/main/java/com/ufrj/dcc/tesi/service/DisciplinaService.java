@@ -1,6 +1,8 @@
 package com.ufrj.dcc.tesi.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.ufrj.dcc.tesi.domain.Disciplina;
 import com.ufrj.dcc.tesi.domain.DisciplinaWrapper;
 import com.ufrj.dcc.tesi.domain.Prova;
 import com.ufrj.dcc.tesi.domain.Tema;
+import com.ufrj.dcc.tesi.domain.Usuario;
 import com.ufrj.dcc.tesi.repository.DisciplinaRepository;
 
 @Service
@@ -22,6 +25,14 @@ public class DisciplinaService {
 
 	@Autowired
 	private ProvaService provaService;
+
+	@Autowired
+	private UsuarioService usuarioService;
+
+	public List<Disciplina> getDisciplinas() {
+
+		return disciplinaRepository.getDisciplinas();
+	}
 
 	public List<Disciplina> getDisciplinasByProfessor( Integer usuarioId ) {
 
@@ -50,6 +61,33 @@ public class DisciplinaService {
 
 		disciplinaWrapper.setTemas( temas );
 		disciplinaWrapper.setDisciplina( disciplina );
+
+		return disciplinaWrapper;
+	}
+
+	public DisciplinaWrapper getAvaliacoesDisciplina( Integer disciplinaId ) {
+
+		DisciplinaWrapper disciplinaWrapper = new DisciplinaWrapper();
+
+		Disciplina disciplina = disciplinaRepository
+				.getDisciplinaById( disciplinaId );
+
+		List<Usuario> professores = usuarioService
+				.getProfessoresByDisciplinaId( disciplinaId );
+
+		Map<Integer, List<Prova>> provas = new HashMap<Integer, List<Prova>>();
+
+		for ( Usuario professor : professores ) {
+
+			List<Prova> provasProfessor = provaService
+					.getProvasByProfessorId( professor.getId() );
+
+			provas.put( professor.getId(), provasProfessor );
+		}
+
+		disciplinaWrapper.setDisciplina( disciplina );
+		disciplinaWrapper.setProfessores( professores );
+		disciplinaWrapper.setProvas( provas );
 
 		return disciplinaWrapper;
 	}
